@@ -5,11 +5,15 @@ import styles from './SearchBar.module.scss';
 
 const SearchBar = () => {
   return (
-    <div>
-      <SearchOutlinedIcon />
+    <div className={styles.searchBar_wrapper}>
+      <SearchOutlinedIcon
+        sx={{
+          position: 'absolute'
+        }}
+      />
       <input
-      className={styles.input}
-      placeholder='Enter your request'/>
+        className={styles.searchBar_input}
+        placeholder='Enter your request' />
     </div>
   )
 }

@@ -1,6 +1,7 @@
-import News from './News/News';
+import NewsFull from './NewsFull/NewsFull';
 import NewsList from './NewsList/NewsList';
 import SearchBar from './SearchBar/SearchBar';
 import HeaderText from './HeaderText/HeaderText';
+import NewsPreview from './NewsPreview/NewsPreview';
 
-export {News, NewsList, SearchBar, HeaderText};
+export { NewsFull, NewsList, SearchBar, HeaderText, NewsPreview };

@@ -1,5 +1,5 @@
 export interface HeaderTexts {
-  title : string;
+  title: string;
   classStyle?: {};
 }
 

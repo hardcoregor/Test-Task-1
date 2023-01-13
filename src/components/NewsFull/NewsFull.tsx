@@ -1,5 +1,5 @@
 import HeaderText from '../HeaderText/HeaderText';
-import styles from './News.module.scss';
+import styles from './NewsFull.module.scss';
 
 import KeyboardBackspaceOutlinedIcon from '@mui/icons-material/KeyboardBackspaceOutlined';
 

@@ -3,6 +3,7 @@ import { HeaderText, NewsList, SearchBar } from '../components'
 import styles from '../App.module.scss';
 
 const Homepage = () => {
+  
   return (
     <div className={styles.container}>
       <HeaderText title={'Filter by keywords'} classStyle={{ marginBottom: "10px" }} />

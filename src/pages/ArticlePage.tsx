@@ -1,11 +1,11 @@
 import React from 'react'
-import { News } from '../components'
+import { NewsFull } from '../components'
 
 const ArticlePage = () => {
   return (
-    <div>
-      <News />
-    </div>
+    <>
+      <NewsFull />
+    </>
   )
 }
 
