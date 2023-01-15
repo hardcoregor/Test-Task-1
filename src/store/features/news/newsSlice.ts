@@ -20,6 +20,7 @@ interface NewsState {
   data: null | INews;
   search: string;
   filteredNews: any;
+  resultLength: number;
 }
 
 const initialState = {
@@ -28,6 +29,7 @@ const initialState = {
   data: null,
   search: '',
   filteredNews: null,
+  resultLength: 0,
 } as NewsState
 
 const newsSlice = createSlice({
@@ -39,11 +41,14 @@ const newsSlice = createSlice({
     },
     getFilteredNews: (state, action: PayloadAction<News[]>) => {
       state.filteredNews = action.payload;
+    },
+    getResultLength: (state, action:PayloadAction<number>) => {
+      state.resultLength = action.payload;
     }
   },
   extraReducers(builder) {
     builder
-      .addCase(getNews.pending, (state, action) => {
+      .addCase(getNews.pending, (state) => {
         state.loading = true;
       })
       .addCase(getNews.fulfilled, (state, action: any) => {
@@ -58,4 +63,4 @@ const newsSlice = createSlice({
 })
 
 export default newsSlice.reducer;
-export const { getSearch, getFilteredNews } = newsSlice.actions;
+export const { getSearch, getFilteredNews, getResultLength} = newsSlice.actions;

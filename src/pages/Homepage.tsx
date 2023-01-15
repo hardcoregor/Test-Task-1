@@ -6,7 +6,7 @@ import { useAppSelector } from '../hooks/useTypedSelector';
 const Homepage = () => {
   const allArticles = useAppSelector(state => state.data);
   const articlesLength = allArticles && Object.values(allArticles).length;
-
+  const resultLength = useAppSelector(state => state.resultLength);
 
   return (
     <div className={styles.container}>
@@ -14,7 +14,7 @@ const Homepage = () => {
 
       <SearchBar />
 
-      <HeaderText title={`Result: ${articlesLength}`} />
+      <HeaderText title={`Result: ${resultLength === 0 ? 0 : resultLength}`} />
 
       <div style={{ border: "1px solid #EAEAEA", width: '100%', marginTop: '5px' }} />
 

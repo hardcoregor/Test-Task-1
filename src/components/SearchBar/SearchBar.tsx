@@ -12,7 +12,7 @@ const SearchBar = () => {
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      dispatch(getSearch(query));
+      dispatch(getSearch(query.toLowerCase()));
     }, 500)
 
     return () => clearTimeout(delayDebounceFn)
