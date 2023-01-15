@@ -16,12 +16,12 @@ const News = () => {
 
   return (
     <div className={styles.news_wrapper}>
-      <img className={styles.news_imageBanner} alt="banner" src={urlToImage} />
+      <img className={styles.news_imageBanner} alt="banner" src={urlToImage ? urlToImage : 'https://static01.nyt.com/images/2021/02/21/insider/21insider-a1-top/21insider-a1-DONOTPUB-videoSixteenByNineJumbo1600.jpg'} />
 
       <div className={styles.news_article}>
         <div className={styles.news_article_wrap}>
-          <h2 className={styles.news_header}>{title}</h2>
-          <p className={styles.news_text}>{content}</p>
+          <h2 className={styles.news_header}>{title ? title : 'Default title'}</h2>
+          <p className={styles.news_text}>{content ? content : 'Default content'}</p>
         </div>
 
         <div className={styles.news_button} onClick={backToHome}>

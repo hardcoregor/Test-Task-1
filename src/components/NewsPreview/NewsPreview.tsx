@@ -38,7 +38,7 @@ const NewsPreview = ({ date, title, content, urlToImage, handleClick}: any) => {
 
   return (
     <div className={styles.newsPrev_wrap}>
-      <img onClick={handleClick} src={urlToImage} alt="test" className={styles.newsPrev_img} />
+      <img onClick={handleClick} src={urlToImage ? urlToImage : 'https://static01.nyt.com/images/2021/02/21/insider/21insider-a1-top/21insider-a1-DONOTPUB-videoSixteenByNineJumbo1600.jpg'} alt="test" className={styles.newsPrev_img} />
 
       <div className={styles.newsPrev_container}>
         <div className={styles.newsPrev_date}>
@@ -46,9 +46,9 @@ const NewsPreview = ({ date, title, content, urlToImage, handleClick}: any) => {
           <span className={styles.newsPrev_num}>{date}</span>
         </div>
 
-        <p className={styles.newsPrev_title}>{highLightning(title)}</p>
+        <p className={styles.newsPrev_title}>{highLightning(title ? title : 'Default title')}</p>
 
-        <p className={styles.newsPrev_text}>{highLightning(content.slice(0, 200))}</p>
+        <p className={styles.newsPrev_text}>{highLightning(content ? content?.slice(0, 200) : 'Article without long read ;(')}</p>
 
         <div className={styles.newsPrev_footer}>
           <span onClick={handleClick}>Read more</span>

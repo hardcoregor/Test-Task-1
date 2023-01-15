@@ -19,7 +19,8 @@ const NewsList = () => {
 
 
   const filterNews = (articlesFetch: any) => {
-    const resultsArray = articlesFetch && articlesFetch.filter((article: any) => article.title.includes(search) || article.content.includes(search));
+    // const resultsArray = articlesFetch && articlesFetch.filter((article: any) => article.title.includes(search) || article.content.includes(search));
+    const resultsArray = articlesFetch && articlesFetch.filter((article: any) => article?.title?.includes(search) || article?.content?.includes(search));
     return resultsArray
   }
 
@@ -35,24 +36,24 @@ const NewsList = () => {
   return (
     <div className={styles.newsList}>
       {filteredNews ? (
-        filteredNews.map((article: News) => (
+        filteredNews.map((article: any) => (
           <NewsPreview
-            key={article.publishedAt}
-            date={article.publishedAt}
+            key={article.pubDate}
+            date={article.pubDate}
             title={article.title}
             content={article.content}
-            urlToImage={article.urlToImage}
+            urlToImage={article.image_url}
             handleClick={() => handleNavigate(article)}
           />
         ))
       ) : (
-        articlesFetch && Object.values(articlesFetch).map((article: News) => (
+        articlesFetch && Object.values(articlesFetch).map((article: any) => (
           <NewsPreview
             key={article.publishedAt}
             date={article.publishedAt}
             title={article.title}
             content={article.content}
-            urlToImage={article.urlToImage}
+            urlToImage={article.image_url}
             handleClick={() => handleNavigate(article)}
           />
         ))

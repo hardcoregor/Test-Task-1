@@ -6,8 +6,10 @@ export const getNews = createAsyncThunk(
   "news/getNews",
   async (data, thunkApi) => {
     try {
-      const { data } = await axios.get<INews>("https://newsapi.org/v2/everything?q=manchester%20united&apiKey=c01546482c20436c9f7122c68e66d309");
-      return data.articles;
+      // const { data } = await axios.get<INews>("https://newsapi.org/v2/everything?q=manchester%20united&apiKey=c01546482c20436c9f7122c68e66d309");
+      // return(data)
+      const { data }: any = await axios.get("https://newsdata.io/api/1/news?apikey=pub_15671e0784fad9ec29ee898e4009880ec1e95&q=social");
+      return data.results
     } catch (error: any) {
       return thunkApi.rejectWithValue(error.message);
     }
@@ -42,7 +44,7 @@ const newsSlice = createSlice({
     getFilteredNews: (state, action: PayloadAction<News[]>) => {
       state.filteredNews = action.payload;
     },
-    getResultLength: (state, action:PayloadAction<number>) => {
+    getResultLength: (state, action: PayloadAction<number>) => {
       state.resultLength = action.payload;
     }
   },
@@ -63,4 +65,4 @@ const newsSlice = createSlice({
 })
 
 export default newsSlice.reducer;
-export const { getSearch, getFilteredNews, getResultLength} = newsSlice.actions;
+export const { getSearch, getFilteredNews, getResultLength } = newsSlice.actions;

@@ -1,12 +1,29 @@
 import React, { useEffect } from 'react'
+
 import { HeaderText, NewsList, SearchBar } from '../components'
 import styles from '../App.module.scss';
 import { useAppSelector } from '../hooks/useTypedSelector';
 
 const Homepage = () => {
-  const allArticles = useAppSelector(state => state.data);
-  const articlesLength = allArticles && Object.values(allArticles).length;
   const resultLength = useAppSelector(state => state.resultLength);
+
+  // useEffect(() => {
+  //   const fetchArticles = async () => {
+  //     try {
+  //       const res = await fetch(
+  //         `https://newsdata.io/api/1/news?apikey=pub_15671e0784fad9ec29ee898e4009880ec1e95&category=sports&country=gb`
+  //       )
+  //       const {results} = await res.json()
+  //       console.log(results)
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   }
+
+  //   fetchArticles()
+  // }, [])
+
+
 
   return (
     <div className={styles.container}>
