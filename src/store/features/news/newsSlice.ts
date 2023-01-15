@@ -1,13 +1,12 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { INews, News } from "../../../types/INews";
+
+import { News } from "../../../types/INews";
 
 export const getNews = createAsyncThunk(
   "news/getNews",
   async (data, thunkApi) => {
     try {
-      // const { data } = await axios.get<INews>("https://newsapi.org/v2/everything?q=manchester%20united&apiKey=c01546482c20436c9f7122c68e66d309");
-      // return(data)
       const { data }: any = await axios.get("https://newsdata.io/api/1/news?apikey=pub_15671e0784fad9ec29ee898e4009880ec1e95&q=social");
       return data.results
     } catch (error: any) {
@@ -19,7 +18,7 @@ export const getNews = createAsyncThunk(
 interface NewsState {
   loading: boolean;
   error: null | string;
-  data: null | INews;
+  data: null | News[];
   search: string;
   filteredNews: any;
   resultLength: number;
@@ -53,7 +52,7 @@ const newsSlice = createSlice({
       .addCase(getNews.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getNews.fulfilled, (state, action: any) => {
+      .addCase(getNews.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
       })

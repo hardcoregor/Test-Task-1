@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { NewsPreview } from '../';
 import { useAppDispatch, useAppSelector } from '../../hooks/useTypedSelector';
 import { getFilteredNews, getResultLength } from '../../store/features/news/newsSlice';
-import { INews, News } from '../../types/INews';
+import { News } from '../../types/INews';
 import styles from './NewsList.module.scss';
 
 const NewsList = () => {
@@ -11,7 +11,7 @@ const NewsList = () => {
   const navigate = useNavigate();
   const search = useAppSelector(state => state.search);
 
-  const handleNavigate: any = (wholeArticle: any) => {
+  const handleNavigate: any = (wholeArticle: News) => {
     navigate(`/articles/${wholeArticle.title}`, { state: wholeArticle })
   }
 
@@ -19,8 +19,7 @@ const NewsList = () => {
 
 
   const filterNews = (articlesFetch: any) => {
-    // const resultsArray = articlesFetch && articlesFetch.filter((article: any) => article.title.includes(search) || article.content.includes(search));
-    const resultsArray = articlesFetch && articlesFetch.filter((article: any) => article?.title?.includes(search) || article?.content?.includes(search));
+    const resultsArray = articlesFetch && articlesFetch.filter((article: News) => article?.title?.includes(search) || article?.content?.includes(search));
     return resultsArray
   }
 

@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react'
+import React, { useCallback } from 'react'
 import { CalendarTodayOutlined, ArrowForwardOutlined } from '@mui/icons-material';
 
 import styles from './NewsPreview.module.scss';
@@ -12,27 +12,31 @@ type NewsProps = {
   handleClick: any;
 }
 
-const NewsPreview = ({ date, title, content, urlToImage, handleClick}: any) => {
+const NewsPreview: React.FC<NewsProps> = ({ date, title, content, urlToImage, handleClick }) => {
   const search = useAppSelector(state => state.search);
 
   const Highlight = (props: any) => {
-    const { filter, str } = props;
-    if (!filter) return str
-    const regexp = new RegExp(filter, 'ig');
-    const matchValue = str.match(regexp);
+    const { filterWord, content } = props;
+
+    if (!filterWord) return content
+    const regexp = new RegExp(filterWord, 'ig');
+    const matchValue = content.match(regexp);
+
     if (matchValue) {
-      return str.split(regexp).map((s: any, index: any, array: any) => {
+      return content.split(regexp).map((s: string, index: number, array: any) => {
+
         if (index < array.length - 1) {
           const c = matchValue.shift()
           return <>{s}<span className={styles.highlight}>{c}</span></>
         }
+
         return s
       })
     }
-    return str
+    return content
   }
 
-  const highLightning = useCallback((str:any) => {
+  const highLightning = useCallback((str: string) => {
     return <Highlight filter={search} str={str} />
   }, [search])
 

@@ -1,14 +1,15 @@
+import React from 'react';
 import HeaderText from '../HeaderText/HeaderText';
 import styles from './NewsFull.module.scss';
 
 import KeyboardBackspaceOutlinedIcon from '@mui/icons-material/KeyboardBackspaceOutlined';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const News = () => {
+const News: React.FC<any> = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
 
-  const {title, urlToImage, content} = state;
+  const { title, urlToImage, content } = state;
 
   const backToHome = () => {
     navigate("/");
