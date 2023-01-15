@@ -1,9 +1,24 @@
+import React, { useState, useEffect } from 'react';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 import styles from './SearchBar.module.scss';
-
+import { useAppDispatch } from '../../hooks/useTypedSelector';
+import { getSearch } from '../../store/features/news/newsSlice';
 
 const SearchBar = () => {
+  const [query, setQuery] = React.useState<string>('');
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      dispatch(getSearch(query));
+    }, 500)
+
+    return () => clearTimeout(delayDebounceFn)
+  }, [dispatch, query])
+
+
   return (
     <div className={styles.searchBar_wrapper}>
       <SearchOutlinedIcon
@@ -12,8 +27,12 @@ const SearchBar = () => {
         }}
       />
       <input
+        type="text"
         className={styles.searchBar_input}
-        placeholder='Enter your request' />
+        placeholder='Enter your request'
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
     </div>
   )
 }

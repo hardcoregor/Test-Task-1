@@ -4,7 +4,7 @@ import styles from './HeaderText.module.scss';
 
 const HeaderText = ({ title, classStyle }: HeaderTexts) => {
   return (
-    <div className={`${styles.title}`} style={classStyle}> {title}</div >
+    <div className={`${styles.title}`} style={classStyle}>{title}</div >
   )
 }
 

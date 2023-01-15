@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { INews } from "../../../types/INews";
-
-
+import { INews, News } from "../../../types/INews";
 
 export const getNews = createAsyncThunk(
   "news/getNews",
@@ -20,18 +18,29 @@ interface NewsState {
   loading: boolean;
   error: null | string;
   data: null | INews;
+  search: string;
+  filteredNews: any;
 }
 
 const initialState = {
   loading: false,
   error: null,
-  data: null
+  data: null,
+  search: '',
+  filteredNews: null,
 } as NewsState
 
 const newsSlice = createSlice({
   name: "news",
   initialState,
-  reducers: {},
+  reducers: {
+    getSearch: (state, action: PayloadAction<string>) => {
+      state.search = action.payload;
+    },
+    getFilteredNews: (state, action: PayloadAction<News[]>) => {
+      state.filteredNews = action.payload;
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(getNews.pending, (state, action) => {
@@ -49,3 +58,4 @@ const newsSlice = createSlice({
 })
 
 export default newsSlice.reducer;
+export const { getSearch, getFilteredNews } = newsSlice.actions;

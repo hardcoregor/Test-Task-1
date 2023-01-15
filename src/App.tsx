@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 
 import { ArticlePage, Homepage } from './pages';
-import { useAppDispatch, useAppSelector } from './hooks/useTypedSelector';
+import { useAppDispatch } from './hooks/useTypedSelector';
 import { getNews } from './store/features/news/newsSlice';
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/articles" element={<ArticlePage />} />
+        <Route path="/articles/:id" element={<ArticlePage />} />
       </Routes>
     </div>
   );

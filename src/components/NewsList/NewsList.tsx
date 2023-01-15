@@ -1,19 +1,60 @@
-import React from 'react'
-import {NewsPreview} from '../';
-import { useAppSelector } from '../../hooks/useTypedSelector';
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { NewsPreview } from '../';
+import { useAppDispatch, useAppSelector } from '../../hooks/useTypedSelector';
+import { getFilteredNews } from '../../store/features/news/newsSlice';
+import { INews, News } from '../../types/INews';
 import styles from './NewsList.module.scss';
 
 const NewsList = () => {
-  const articles = useAppSelector(state => state.data);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const search = useAppSelector(state => state.search);
+
+  const handleNavigate: any = (wholeArticle: any) => {
+    navigate(`/articles/${wholeArticle.title}`, { state: wholeArticle })
+  }
+
+  const articlesFetch = useAppSelector(state => state.data);
+
+  const filterNews = (articlesFetch: any) => {
+    const resultsArray = articlesFetch && articlesFetch.filter((article: any) => article.title.includes(search) || article.content.includes(search));
+    return resultsArray
+  }
+
+  const filteredNews: any = filterNews(articlesFetch);
+
+  useEffect(() => {
+    dispatch(getFilteredNews(filteredNews))
+  }, [dispatch, filteredNews])
 
   return (
     <div className={styles.newsList}>
-      <NewsPreview />
-      <NewsPreview />
-      <NewsPreview />
-      <NewsPreview />
-      <NewsPreview />
-      <NewsPreview />
+      {filteredNews ? (
+        filteredNews.map((article: News) => (
+          <NewsPreview
+            key={article.publishedAt}
+            date={article.publishedAt}
+            title={article.title}
+            content={article.content}
+            urlToImage={article.urlToImage}
+            handleClick={() => handleNavigate(article)}
+          />
+        ))
+      ) : (
+        articlesFetch && Object.values(articlesFetch).map((article: News) => (
+          <NewsPreview
+            key={article.publishedAt}
+            date={article.publishedAt}
+            title={article.title}
+            content={article.content}
+            urlToImage={article.urlToImage}
+            handleClick={() => handleNavigate(article)}
+          />
+        ))
+      )}
+
+
     </div>
   )
 }
