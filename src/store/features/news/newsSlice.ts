@@ -7,7 +7,7 @@ export const getNews = createAsyncThunk(
   "news/getNews",
   async (data, thunkApi) => {
     try {
-      const { data }: any = await axios.get("https://newsdata.io/api/1/news?apikey=pub_15671e0784fad9ec29ee898e4009880ec1e95&q=social");
+      const { data }: any = await axios.get("https://newsdata.io/api/1/news?apikey=pub_15671e0784fad9ec29ee898e4009880ec1e95&country=au,ca");
       return data.results
     } catch (error: any) {
       return thunkApi.rejectWithValue(error.message);

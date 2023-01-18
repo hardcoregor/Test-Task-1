@@ -9,7 +9,7 @@ const News: React.FC<any> = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
 
-  const { title, urlToImage, content } = state;
+  const { title, image_url, description } = state;
 
   const backToHome = () => {
     navigate("/");
@@ -17,12 +17,12 @@ const News: React.FC<any> = () => {
 
   return (
     <div className={styles.news_wrapper}>
-      <img className={styles.news_imageBanner} alt="banner" src={urlToImage ? urlToImage : 'https://static01.nyt.com/images/2021/02/21/insider/21insider-a1-top/21insider-a1-DONOTPUB-videoSixteenByNineJumbo1600.jpg'} />
+      <img className={styles.news_imageBanner} alt="banner" src={image_url ? image_url : 'https://upload.wikimedia.org/wikipedia/commons/7/75/No_image_available.png'} />
 
       <div className={styles.news_article}>
         <div className={styles.news_article_wrap}>
           <h2 className={styles.news_header}>{title ? title : 'Default title'}</h2>
-          <p className={styles.news_text}>{content ? content : 'Default content'}</p>
+          <p className={styles.news_text}>{description ? description : 'Default content'}</p>
         </div>
 
         <div className={styles.news_button} onClick={backToHome}>

@@ -16,16 +16,16 @@ const NewsPreview: React.FC<NewsProps> = ({ date, title, content, urlToImage, ha
   const search = useAppSelector(state => state.search);
 
   const Highlight = (props: any) => {
-    const { filterWord, content } = props;
+    const { filter, str } = props;
 
-    if (!filterWord) return content
-    const regexp = new RegExp(filterWord, 'ig');
-    const matchValue = content.match(regexp);
+    if (!filter) return str
+    const regExp = new RegExp(filter, 'ig');
+    const matchValue = str.match(regExp);
 
     if (matchValue) {
-      return content.split(regexp).map((s: string, index: number, array: any) => {
+      return str.split(regExp).map((s: string, index: number, array: any) => {
 
-        if (index < array.length - 1) {
+        if(index < array.length -1 ) {
           const c = matchValue.shift()
           return <>{s}<span className={styles.highlight}>{c}</span></>
         }
@@ -33,7 +33,7 @@ const NewsPreview: React.FC<NewsProps> = ({ date, title, content, urlToImage, ha
         return s
       })
     }
-    return content
+    return str
   }
 
   const highLightning = useCallback((str: string) => {
@@ -42,7 +42,7 @@ const NewsPreview: React.FC<NewsProps> = ({ date, title, content, urlToImage, ha
 
   return (
     <div className={styles.newsPrev_wrap}>
-      <img onClick={handleClick} src={urlToImage ? urlToImage : 'https://static01.nyt.com/images/2021/02/21/insider/21insider-a1-top/21insider-a1-DONOTPUB-videoSixteenByNineJumbo1600.jpg'} alt="test" className={styles.newsPrev_img} />
+      <img onClick={handleClick} src={urlToImage ? urlToImage : 'https://upload.wikimedia.org/wikipedia/commons/7/75/No_image_available.png'} alt="test" className={styles.newsPrev_img} />
 
       <div className={styles.newsPrev_container}>
         <div className={styles.newsPrev_date}>

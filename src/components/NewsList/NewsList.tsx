@@ -37,10 +37,10 @@ const NewsList = () => {
       {filteredNews ? (
         filteredNews.map((article: any) => (
           <NewsPreview
-            key={article.pubDate}
+            key={article.description}
             date={article.pubDate}
             title={article.title}
-            content={article.content}
+            content={article.description}
             urlToImage={article.image_url}
             handleClick={() => handleNavigate(article)}
           />
@@ -48,10 +48,10 @@ const NewsList = () => {
       ) : (
         articlesFetch && Object.values(articlesFetch).map((article: any) => (
           <NewsPreview
-            key={article.publishedAt}
-            date={article.publishedAt}
+            key={article.description}
+            date={article.pubDate}
             title={article.title}
-            content={article.content}
+            content={article.description}
             urlToImage={article.image_url}
             handleClick={() => handleNavigate(article)}
           />
